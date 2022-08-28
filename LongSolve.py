@@ -52,5 +52,4 @@ def solve(final_max, number_of_segments, accuracy = 2):
         maxes = generateMaximums(scale_guess, number_of_segments)
         guess_maxes.append(maxes[len(maxes) - 1])
 
-
     return scale_guess, maxes
