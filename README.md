@@ -39,8 +39,8 @@ If you've spent some (a lot of) time looking at numbers, you might recognize tha
 ![Figure_2b](Figures/Figure_2b.png) </br>
 And if we plot the cross-section of our predictions and the actual value found by the Long Solve method, we see a straight line </br>
 ![Figure_3](Figures/Figure_3.png) </br>
-with a slope of (1.69 $\pm$ 0.01). This tells us that the relationship between the number of segments and the scale\range slope is $(1.69 \pm 0.01) \over (number\ of\ segments)^2$. </br>
-From here, we can subsitute the prediction for the slope of scale/range into the relationship of scale vs range, or $(1.69 \pm 0.01)\ \dot \ \ Range \over (number\ of\ segments)^2$. </br> </br>
+with a slope of (1.72 $\pm$ 0.01). This tells us that the relationship between the number of segments and the scale\range slope is $(1.72 \pm 0.01) \over (number\ of\ segments)^2$. </br>
+From here, we can subsitute the prediction for the slope of scale/range into the relationship of scale vs range, or $(1.72 \pm 0.01)\ \dot \ \ Range \over (number\ of\ segments)^2$. </br> </br>
 This equation does yeild close results for predicting the actual value of the scale factor, but the predictions have an unsatisfying standard deviation of 200 - too large to yeild accurate predictions. However, if we use this newfound equation for making the initial guess during the Long Solve method, we can reduce the time spent operating. Runtime can be further reduced by using the uncertainty in our predicition for setting the initial value by which we adjust our scale factor guess when it is above or below the true value, or $0.01\ \dot \ \ Range \over (number\ of\ segments)^2$, as it reduces the amount of time spent iterating over small intervals. </br> </br>
 
 To find the effect on performance from using the equation, we adjust the function code from a simple
@@ -50,7 +50,7 @@ scaler = 1.0 # Amount to adjust the scale factor guess by when last value of ser
 ```
 to
 ```
-scale_guess = (1.69 * final_max) / (number_of_segments**2) # Current guess for the correct scale factor
+scale_guess = (1.72 * final_max) / (number_of_segments**2) # Current guess for the correct scale factor
 scaler = (0.01 * final_max) / (number_of_segments**2) # Amount to adjust the scale factor guess by when last value of series is not equal to [final_max]
 ```
 </br>
