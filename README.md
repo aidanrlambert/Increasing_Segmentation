@@ -37,7 +37,7 @@ Each different color in the above graph represents scale factor vs range size fo
 ![Figure_2](Figures/Figure_2.png) </br>
 
 If you've spent some (a lot of) time looking at numbers, you might recognize that shape. It looks just a bit like $1 \over x^2$. If we take a look at the above graph overlayed with a chart of $1 \over x^2$, we can see they are very similar. </br>
-![Figure_2b](Figures/Figure_2b.png) </br>
+![Figure_2b](https://github.com/RillienCot/Increasing_Segmentation/blob/53af2f0c698278a14d1dfc3c575bd47b937ee951/Figures/Figure_2b.png) </br>
 And if we plot the cross-section of our predictions and the actual value found by the Long Solve method, we see a straight line </br>
 ![Figure_3](Figures/Figure_3.png) </br>
 with a slope of (1.72 $\pm$ 0.01). This tells us that the relationship between the number of segments and the scale\range slope is $(1.72 \pm 0.01) \over (number\ of\ segments)^2$. </br>
