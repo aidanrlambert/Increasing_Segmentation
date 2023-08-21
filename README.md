@@ -36,7 +36,7 @@ Charting the scale factors generated vs the range size for these 250,000 cases s
 Each different color in the above graph represents scale factor vs range size for only one choice of number of segments. From this, we can deduce that there must be some relationship between the number of segments and the slope of scale factor vs range size. </br>
 ![Figure_2](Figures/Figure_2.png) </br>
 
-If you've spent some (a lot of) time looking at numbers, you might recognize that shape. It looks just a bit like $1 \over x^2$. If we take a look at the above graph overlayed with a chart of $1 \over x^2$, we can see their very similar. </br>
+If you've spent some (a lot of) time looking at numbers, you might recognize that shape. It looks just a bit like $1 \over x^2$. If we take a look at the above graph overlayed with a chart of $1 \over x^2$, we can see they are very similar. </br>
 ![Figure_2b](Figures/Figure_2b.png) </br>
 And if we plot the cross-section of our predictions and the actual value found by the Long Solve method, we see a straight line </br>
 ![Figure_3](Figures/Figure_3.png) </br>
