@@ -27,7 +27,7 @@ That is
 \sum_{i=1}^{10} i\ &=\ 10 + 9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 = 55 \\
 \end{aligned}
 ```
-A common identity that utilizes this summation states that the *n*th sum in this series can be calculated using the identity $\frac{n(n+1)}{2}$
+A common identity that utilizes this summation states that the *n*th sum in this series can be calculated using the identity $\frac{n(n+1)}{2}$. ([proof](https://youtu.be/NqwvNm2enEo?si=oBuBLltDGJ-OPTZv))
 ```math
 \sum_{i=1}^n i\ =\ \frac{n(n+1)}{2}
 ```
