@@ -1,7 +1,90 @@
 # Description of Project
-Segments a range into a specified number of segments such that the size of each segment is equally larger than the previous.
-For example, the range of 0-55 can be segmented into the series [1, 3, 6, 10, 15, 21, 28, 36, 45, 55] which has segment sizes of [2, 3, 4, 5, 6, 7, 8, 9, 10].
-Each segment size (i.e. scale factor) is 1 larger than that of the previous segment.
+Segments a range into a specified number of subranges such that the step between each subrange is equally larger than the previous.
+For example, the range of 0-55 can be segmented into the series of subranges [0-1,1-3, 3-6, 6-10, 10-15, 15-21, 21-28, 28-36, 36-45, 45-55] where the size of each subrange is, in order, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].
+Each size of each subrange (i.e. scale factor) is 1 larger than that of the previous segment.
+
+# Finding an answer with Calculus
+This method works by pulling inspiration from infinite summations and finds an exact answer very quickly.
+
+Let's take a look at the example mentioned in the description. We're asked to split the range 0-55 into 10 subranges such that step between each subrange is equally larger than the previous. This series of subranges is [0-1,1-3, 3-6, 6-10, 10-15, 15-21, 21-28, 28-36, 36-45, 45-55]. The maximum of each subrange is [1, 3, 6, 10, 15, 21, 28, 36, 45, 55] and the size of each subrange is [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]. The maximum of the *n*th subrange is equal to the sum of previous $n$ sizes of each subrange. For example:
+```math
+\begin{aligned}
+\text{@ subrange n = 1, maximum} = 1 &= 1 \\
+\text{@ subrange n = 2, maximum} = 3 &= 2 + 1 \\
+\text{@ subrange n = 3, maximum} = 6 &= 3 + 2 + 1 \\
+ &... \\
+\text{@ subrange n = 10, maximum} = 55 &= 10 + 9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 \\
+\end{aligned}
+```
+The mathematical expression of such a series is $$\sum_{i=1}^n i$$
+That is
+```math
+\begin{aligned}
+\sum_{i=1}^1 i\ &=\ 1 = 1 \\
+\sum_{i=1}^2 i\ &=\ 2 + 1 = 3 \\
+\sum_{i=1}^3 i\ &=\ 3 + 2 + 1 = 6 \\
+&... \\
+\sum_{i=1}^{10} i\ &=\ 10 + 9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 = 55 \\
+\end{aligned}
+```
+A common identity that utilizes this summation states that the *n*th sum in this series can be calculated using the identity $\frac{n(n+1)}{2}$
+```math
+\sum_{i=1}^n i\ =\ \frac{n(n+1)}{2}
+```
+That is
+```math
+\begin{aligned}
+\sum_{i=1}^1 i\ &= \frac{1(1+1)}{2} = 1 \\
+\sum_{i=1}^2 i\ &= \frac{2(2+1)}{2} = 3 \\
+\sum_{i=1}^3 i\ &= \frac{3(3+1)}{2} = 6 \\
+&... \\
+\sum_{i=1}^{10} i\ &= \frac{10(10+1)}{2} = 55 \\
+\end{aligned}
+```
+Now, for any $n$ number of ranges where the step between each range (scale factor) is equally larger than the previous, the size of each range can be expressed generally as
+```math
+\text{scale factor }\ \dot\ \ \ [1, 2, 3,..., n]
+```
+For example, if we want series of ranges where each range is 3 larger than the previous range (scale factor = 3), the size of each range would be
+```math
+\text{scale factor }\ \dot\ \ \ [1, 2, 3,..., n] = 3\ \dot\ \ \ [1, 2, 3,..., n] = [3, 6, 9,..., 3n]
+```
+Referring back to the previous summation identity, we can thus express the maximum of each range in this series as
+```math
+3 \sum_{i=1}^n i\ = \frac{3n(n+1)}{2}
+```
+or, $[3, 9, 18,...,\frac{3n(n+1)}{2}]$ meaning that any series of ranges that fit our criteria can have its maximums expressed as
+```math
+\text{scale factor}\ \dot\ \ \frac{n(n+1)}{2}
+```
+But we need to calculate the scale factor from a range and number of subranges, not calculate ranges from a scale factor. How do we make use of this identity? If we are given a range maximum and $n$ number of subranges, we can calculate the corresponding scale factor like such:
+```math
+\begin{aligned}
+\text{scale factor}\ \dot\ \ \frac{n(n+1)}{2} &= \text{maximum} \\
+\text{scale factor}\ &= \frac{\text{maximum}}{\frac{n(n+1)}{2}} \\
+\text{scale factor}\ &= \frac{2\ \dot\ \ \text{maximum}}{n(n+1)}
+\end{aligned}
+```
+We are now in a position to easily solve our original problem with one simple equation. Given a range from [min] - [max], and [number of subranges], we can find the maximum of the *n*th subrange using
+```math
+\begin{gather}
+\text{scale factor}\ \dot\ \ \frac{n(n+1)}{2} \\
+\frac{2\ \dot\ \ \text{[max]}}{\text{[number of subranges]}\ \dot\ \ (\text{[number of subranges]}+1)}\ \dot\ \ \frac{n(n+1)}{2} \\
+\boxed{\frac{\text{[max]}\ \dot\ \ n\ \dot\ \ (n+1)}{\text{[number of subranges]}\ \dot\ \ (\text{[number of subranges]}+1)}}
+\end{gather}
+```
+To check that our work is accurate, let us return to our original example. We are told to break the range 0-55 into 10 subranges such that the step between each subrange is equally larger than the previous.
+Our ranges, according to our calculations is:
+```math
+\begin{aligned}
+\frac{\text{[max]}\ \dot\ \ n\ \dot\ \ (n+1)}{\text{[number of subranges]}\ \dot\ \ (\text{[number of subranges]}+1)} &= \frac{55\ \dot\ \ 1\ \dot\ \ (1+1)}{10\ \dot\ \ (10+1)} = 1 \\
+\frac{\text{[max]}\ \dot\ \ n\ \dot\ \ (n+1)}{\text{[number of subranges]}\ \dot\ \ (\text{[number of subranges]}+1)} &= \frac{55\ \dot\ \ 2\ \dot\ \ (2+1)}{10\ \dot\ \ (10+1)} = 3 \\
+\frac{\text{[max]}\ \dot\ \ n\ \dot\ \ (n+1)}{\text{[number of subranges]}\ \dot\ \ (\text{[number of subranges]}+1)} &= \frac{55\ \dot\ \ 3\ \dot\ \ (3+1)}{10\ \dot\ \ (10+1)} = 6 \\
+... \\
+\frac{\text{[max]}\ \dot\ \ n\ \dot\ \ (n+1)}{\text{[number of subranges]}\ \dot\ \ (\text{[number of subranges]}+1)} &= \frac{55\ \dot\ \ 10\ \dot\ \ (10+1)}{10\ \dot\ \ (10+1)} = 55 \\
+\end{aligned}
+```
+It works!
 
 # Using the long solve method
 This method works by guess-and-check. 
